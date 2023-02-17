@@ -16,6 +16,7 @@ class ShoppingCartTest {
 		cart.addItem(new LineItem(Item.builder().id("item-1").name("Dove_Soap").itemType(ItemType.SOAP)
 				.price(BigDecimal.valueOf(39.55)).build() ));	
 		
+		
 //		Item item = Item.builder().id("item-1").name("Dove_Soap").itemType(ItemType.SOAP)
 //				.price(BigDecimal.valueOf(39.55)).build();
 //		cart.addItem(item);
