@@ -15,7 +15,8 @@ import lombok.Setter;
 public class ShoppingCart {
 
 	private List<LineItem> itemsInCart = new ArrayList<>();
-	
+
+	private Inventory inventory;
 	
 	public void addItem(LineItem lineItem) {
 	
@@ -32,9 +33,9 @@ public class ShoppingCart {
 		return totalItem;
 	}
 
-	public ShoppingCart() {
+	public ShoppingCart(Inventory inventory) {
 
-		
+		 this.inventory = inventory; 
 	}
 
 }

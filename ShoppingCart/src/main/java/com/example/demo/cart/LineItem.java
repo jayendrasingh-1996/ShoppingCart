@@ -7,11 +7,12 @@ import lombok.Getter;
 @Getter
 public class LineItem {
 	
-	private Item item;
+	private String itemId;
 	private int quantity;
-	public LineItem(Item item, int quantity) {
+	
+	public LineItem(String itemId, int quantity) {
 		super();
-		this.item = item;
+		this.itemId = itemId;
 		this.quantity = quantity;
 	}
 //	public Item getItem() {
@@ -21,8 +22,8 @@ public class LineItem {
 //		return quantity;
 //	}
 	
-	public LineItem ( Item item) {
-		this(item,1);
+	public LineItem ( String itemId) {
+		this(itemId,1);
 	}
 	
 
