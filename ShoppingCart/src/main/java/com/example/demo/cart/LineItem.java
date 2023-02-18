@@ -1,20 +1,30 @@
 package com.example.demo.cart;
 
+import java.math.BigDecimal;
+import java.util.function.IntPredicate;
+
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Builder
 @Getter
+@Setter
 public class LineItem {
 
 	private String itemId;
 	private int quantity;
+	private BigDecimal price;
+	private String name;
 
-	public LineItem(String itemId, int quantity) {
+	public LineItem(String itemId, int quantity,BigDecimal price,String name) {
 		super();
 		this.itemId = itemId;
 		this.quantity = quantity;
+		this.price=price;
+		this.name=name;
 	}
+	 
 //	public Item getItem() {
 //		return item;
 //	}
@@ -22,10 +32,17 @@ public class LineItem {
 //		return quantity;
 //	}
 
-	public LineItem(String itemId) {
-		this(itemId, 1);
+	public LineItem(String itemId,int quantity) {
+		this.itemId=itemId;
+		this.quantity=quantity;
+				
 	}
 
+	public LineItem(String itemId) {
+		this(itemId,1);
+		
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
@@ -53,5 +70,15 @@ public class LineItem {
 	
 		this.quantity -=quantityToReduceBy;
 		
+	}
+
+	public BigDecimal totalPrice() {
+		// TODO Auto-generated method stub
+		return price.multiply(BigDecimal.valueOf(quantity));
+		
+	}
+
+	public void increaseQuantityBy(int quantityToAdd) {
+		this.quantity +=quantityToAdd;
 	}
 }
