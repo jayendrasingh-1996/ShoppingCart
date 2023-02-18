@@ -51,6 +51,8 @@ class ShoppingCartTest {
 
 	}
 
+
+
 	@Test
 	void should_add_an_item_to_a_cart() throws Exception {
 
@@ -67,6 +69,24 @@ class ShoppingCartTest {
 
 	}
 
+	@Test
+	void should_add_an_multiple_same_item_to_a_cart() throws Exception {
+
+//		cart.addItem(new LineItem(Item.builder().id("item-1").name("Dove_Soap").itemType(ItemType.SOAP)
+//				.price(BigDecimal.valueOf(39.55)).build()));
+//
+
+
+		cart.addItem(new LineItem("item-1",5));
+
+		int totalItemCount = cart.totalNumberOfItems();
+
+		assertThat(totalItemCount).isEqualTo(5);
+
+		assertEquals(cart.getTotalPriceOfItems(), 199.95);
+		
+	}
+	
 	@Test
 	public void should_add_multiple_items_to_the_cart() {
 
@@ -176,6 +196,50 @@ class ShoppingCartTest {
 			
 	}
 	
-
+	@Test
+	public void calculate_the_tax_rate_of_the_shopping_cart_with_multiple_items()
+	{
+		
+		cart.addItem(new LineItem("item-1", 2));
+		cart.addItem(new LineItem("item-2", 2));
+		
+		Assertions.assertEquals(cart.getSalesTax(), 35.00);
+		Assertions.assertEquals(cart.getTotalPriceWithTax(), 314.96);
+		
+		
+	}
 	
+
+//	@Test
+//	public void calculate_the_tax_rate_of_the_shopping_cart_with_multiple_items_removed_of_same_type()
+//	{
+//		
+//		cart.addItem(new LineItem("item-1", 2));
+//		cart.addItem(new LineItem("item-2", 2));
+//		
+//		cart.remove(new LineItem("item-1",1));
+//		
+//		Assertions.assertEquals(cart.getSalesTax(), 35.00);
+//		Assertions.assertEquals(cart.getTotalPriceOfItems(), 314.96);
+//		
+//		
+//	}
+//	
+//	@Test
+//	public void calculate_the_tax_rate_of_the_shopping_cart_with_multiple_items_removed_of_both_type()
+//	{
+//		
+//		cart.addItem(new LineItem("item-1", 2));
+//		cart.addItem(new LineItem("item-2", 2));
+//		
+//		cart.remove(new LineItem("item-1",1));
+//		cart.remove(new LineItem("item-2",1));
+//		
+//		
+//		Assertions.assertEquals(cart.getSalesTax(), 35.00);
+//		Assertions.assertEquals(cart.getTotalPriceWithTax(), 314.96);
+//		
+//		
+//	}
+//	
 }
