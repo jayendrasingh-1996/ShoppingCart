@@ -4,6 +4,7 @@ package com.example.demo.cart;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -36,6 +37,24 @@ public class ShoppingCart {
 	public ShoppingCart(Inventory inventory) {
 
 		 this.inventory = inventory; 
+	}
+
+	public void remove(LineItem lineItemToRemove) {
+		boolean deleteLineItem = false;
+		for(LineItem itemInCart : itemsInCart) {
+			if(Objects.equals(itemInCart.getItemId(), lineItemToRemove.getItemId()))
+			{
+				if(lineItemToRemove.getQuantity() == itemInCart.getQuantity()) {
+					deleteLineItem =true;
+				}else {
+					itemInCart.reduceQuantityBy(lineItemToRemove.getQuantity());
+				}
+			}
+		}
+		
+		if(deleteLineItem) {
+		this.itemsInCart.remove(lineItemToRemove);
+		}
 	}
 
 }

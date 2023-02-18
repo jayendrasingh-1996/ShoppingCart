@@ -4,17 +4,33 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+//@ExtendWith(MockitoExtension.class)
 class ShoppingCartTest {
 
+	@Mock
 	private Inventory inventory;
 
-	ShoppingCart cart;
+	@InjectMocks
+	private ShoppingCart cart;
 
-	@BeforeAll
+	@BeforeEach
+	public void init() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Before
 	public void setUp() throws Exception {
 
 		Item item1 = Item.builder().id("item-1").name("Dove_Soap").itemType(ItemType.SOAP)
@@ -96,4 +112,37 @@ class ShoppingCartTest {
 
 	}
 
+	
+	@Test
+	public void should_remove_an_item_from_cart() {
+		cart.addItem(new LineItem("item-1"));
+		cart.addItem(new LineItem("item-2"));
+
+		cart.remove(new LineItem("item-2"));
+		
+		int totalItemCount = cart.totalNumberOfItems();
+		assertThat(totalItemCount).isEqualTo(1);
+		
+		
+		
+	}
+	
+	@Test
+	public void should_remove_specific_quantity_of_an_item_from_cart() {
+
+		cart.addItem(new LineItem("item-1",4));
+		cart.addItem(new LineItem("item-2",5));
+
+		cart.remove(new LineItem("item-2",2));
+		cart.remove(new LineItem("item-2",3));
+
+		int totalItemCount = cart.totalNumberOfItems();
+		assertThat(totalItemCount).isEqualTo(4);
+		
+		
+		
+	}
+	
+		
+	
 }
