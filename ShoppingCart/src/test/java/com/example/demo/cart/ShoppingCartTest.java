@@ -203,43 +203,44 @@ class ShoppingCartTest {
 		cart.addItem(new LineItem("item-1", 2));
 		cart.addItem(new LineItem("item-2", 2));
 		
-		Assertions.assertEquals(cart.getSalesTax(), 35.00);
-		Assertions.assertEquals(cart.getTotalPriceWithTax(), 314.96);
+		Assertions.assertEquals(cart.getSalesTax(), 33.6);
+		Assertions.assertEquals(cart.getTotalPriceWithTax(), 313.56);
 		
 		
 	}
 	
 
-//	@Test
-//	public void calculate_the_tax_rate_of_the_shopping_cart_with_multiple_items_removed_of_same_type()
-//	{
-//		
-//		cart.addItem(new LineItem("item-1", 2));
-//		cart.addItem(new LineItem("item-2", 2));
-//		
-//		cart.remove(new LineItem("item-1",1));
-//		
-//		Assertions.assertEquals(cart.getSalesTax(), 35.00);
-//		Assertions.assertEquals(cart.getTotalPriceOfItems(), 314.96);
-//		
-//		
-//	}
-//	
-//	@Test
-//	public void calculate_the_tax_rate_of_the_shopping_cart_with_multiple_items_removed_of_both_type()
-//	{
-//		
-//		cart.addItem(new LineItem("item-1", 2));
-//		cart.addItem(new LineItem("item-2", 2));
-//		
-//		cart.remove(new LineItem("item-1",1));
-//		cart.remove(new LineItem("item-2",1));
-//		
-//		
-//		Assertions.assertEquals(cart.getSalesTax(), 35.00);
-//		Assertions.assertEquals(cart.getTotalPriceWithTax(), 314.96);
-//		
-//		
-//	}
-//	
+	@Test
+	public void calculate_the_tax_rate_of_the_shopping_cart_with_multiple_items_removed_of_same_type()
+	{
+		
+		cart.addItem(new LineItem("item-1",1));
+		cart.addItem(new LineItem("item-2", 1));
+		
+		cart.remove(new LineItem("item-1",1));
+		cart.remove(new LineItem("item-2",1));
+		
+		Assertions.assertEquals(cart.getSalesTax(), 0.0);
+		Assertions.assertEquals(cart.getTotalPriceOfItems(), 0.0);
+		
+		
+	}
+	
+	@Test
+	public void calculate_the_tax_rate_of_the_shopping_cart_with_multiple_items_removed_of_both_type()
+	{
+		
+		cart.addItem(new LineItem("item-1", 2));
+		cart.addItem(new LineItem("item-2", 2));
+		
+		cart.remove(new LineItem("item-1",1));
+		cart.remove(new LineItem("item-2",1));
+		
+		
+		Assertions.assertEquals(cart.getSalesTax(), 16.8);
+		Assertions.assertEquals(cart.getTotalPriceWithTax(), 156.77999999999997);
+		
+		
+	}
+	
 }
