@@ -72,15 +72,14 @@ public class ShoppingCart {
 
 		if (lineItem.getQuantity() > 0) {
 
-//			double result = lineItem.getPrice().doubleValue()) * lineItem.getQuantity() + calculateCurrentItemTax(lineItem);
 			BigDecimal bd = BigDecimal.valueOf(
 					(lineItem.getPrice().doubleValue()) * lineItem.getQuantity() + calculateCurrentItemTax(lineItem));
 
 			bd = bd.setScale(2, RoundingMode.HALF_UP);
-			return  bd.doubleValue();
+			return bd.doubleValue();
 
 		}
-		return  0.0;
+		return 0.0;
 	}
 
 	private Double calculateCurrentItemTax(LineItem lineItem) {
@@ -88,8 +87,6 @@ public class ShoppingCart {
 		if (lineItem.getQuantity() > 0) {
 
 			BigDecimal bd;
-			// BigDecimal bd = BigDecimal.valueOf(lineItem.getPrice().doubleValue() *
-			// lineItem.getQuantity() * 0.12);
 
 			bd = lineItem.getPrice().multiply(new BigDecimal(lineItem.getQuantity()));
 
@@ -121,17 +118,10 @@ public class ShoppingCart {
 	public void remove(LineItem lineItemToRemove) {
 		boolean deleteLineItem = false;
 
-//		int  quantityIfAllTheProductsAreRemoved; 
-//		BigDecimal priceIfAllTheProductsAreRemoved;
-//		
 		for (LineItem itemInCart : itemsInCart.values()) {
 
 			if (Objects.equals(itemInCart.getItemId(), lineItemToRemove.getItemId())) {
 
-				// priceIfAllTheProductsAreRemoved.valueOf(quantityIfAllTheProductsAreRemoved);
-
-//				quantityIfAllTheProductsAreRemoved=itemInCart.getQuantity();
-//				
 				lineItemToRemove.setPrice(itemInCart.getPrice());
 
 				if (lineItemToRemove.getQuantity() == itemInCart.getQuantity()) {
@@ -153,20 +143,11 @@ public class ShoppingCart {
 		// sales tax
 		this.salesTax -= calculateCurrentItemTax(lineItemToRemove);
 
-		// total price
-
-//		Float tax= calculateCurrentItemSalesTaxPrice(lineItemToRemove);
-//		BigDecimal bd ;
-//		bd=new BigDecimal(this.totalPriceWithTax);
-//		 bd=bd.setScale(2, RoundingMode.HALF_UP);
-//		bd=bd.subtract(new BigDecimal(tax));
-//	
 		this.totalPriceWithTax -= calculateCurrentItemSalesTaxPrice(lineItemToRemove);
 
 		if (this.totalPriceWithTax <= 0) {
 			this.totalPriceWithTax = 0;
 		}
-//		this.totalPriceWithTax -= (double)tax;
 
 		this.totalPriceOfItems -= calculateCurrentItemSalesPrice(lineItemToRemove);
 		if (this.totalPriceOfItems <= 0) {
